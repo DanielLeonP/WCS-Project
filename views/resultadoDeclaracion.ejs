@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Resultado Declaración</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <%- include menu.ejs %>
+
+    <div id="resultado">
+      <h1>¡Tu declaración '<%= Nombre %>' con el periodo '<%= Periodo %>', ha sido realizada exitosamente!</h1>
+      <a href="/Desglose/<%= idDeclaracion %>">Haz click aqui para ver tu declaración</a>
+    </div>
+
+</body>
+
+</html>

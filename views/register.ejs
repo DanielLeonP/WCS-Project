@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css"  href='../stylesheets/style.css' />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+    <title>Registro</title>
+</head>
+
+<body>
+<div id="imagen-fondo">
+    <h1>Crea tu cuenta</h1>
+ <div id="izquierda2">
+    <form action="/RegisterValida" method="post">
+        <p>Nombre:</p>
+        <input id="nombre" type="text" name="nombre" placeholder="Nombre" required><br>
+        <p>RFC:</p>
+        <input id="rfc" type="text" name="rfc" placeholder="RFC" required><br>
+        <p>Correo:</p>
+        <input id="correo" type="email" name="correo" placeholder="Correo" required><br>
+        <p>Contraseña:</p>
+        <input id="contrasena" type="password" name="contrasena" placeholder="Contraseña" required><br>
+        <br>
+        <input id="crea" type="submit" value="Crear"><br>
+    </form>
+ </div>
+ <div id="derecha2">
+    <img src="Images/user.png" alt="">
+ </div>
+</div>
+</body>
+
+</html>

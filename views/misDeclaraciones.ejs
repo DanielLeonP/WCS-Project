@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mis declaraciones</title>
+  <link rel="stylesheet" type="text/css" href='../stylesheets/style.css' />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <%- include menu.ejs %>
+    <div id="inicio">
+      <h1>Mis declaraciones</h1>
+    </div>
+    <div id="tabla">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha Realización</th>
+            <th>Periodo</th>
+            <th>Monto remunerado</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <% for (var i =0; i < DPendientes.length; i++) { %>               
+          <tr>
+            <td><%= DPendientes[i].Nombre %></td>
+            <td><%= DPendientes[i].FechaRealizada %></td>
+            <td><%= DPendientes[i].Periodo %></td>
+            <td>$ <%= DPendientes[i].Monto_remunerado %> mxn.</td>
+            <td><input id="imprime" type="submit" value="Ver" onclick="window.location.href ='/Desglose/<%= DPendientes[i].idDeclaracion %>'"></td>
+          </tr>    
+        <% } %>
+      </table>
+    </div>
+</body>
+
+</html>

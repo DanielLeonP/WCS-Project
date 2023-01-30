@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+  <title>Formulario</title>
+</head>
+
+<body>
+  <%- include menu.ejs %>
+    <div id="contenedor">
+
+      <form action="/formularioTerminado" method='POST' enctype="multipart/form-data">
+
+        <h1>Formulario para declaración</h1>
+
+        <br><br>
+        <script>
+          function updateValue(inputName, divName, impuesto) {//INPUTNAME ES EL ID DEL IMPUT QUE SE UTILIZA, Y DIVNAME ES EL ID DEL ID DONDE SE QUIERE INGRESAR CODIGO
+            const input = document.getElementById(inputName).value;//SE OBTIENE EL INPUT QUE TIENE DE ID INPUTNAME
+            const div = document.getElementById(divName);//SE OBTIENE EL DIV QUE TIENE DE ID DIVNAME
+            div.innerHTML = "";
+            // div.textContent = e.target.value;
+
+            tipoImpuestos = ['Impuestos en el extranjero', 'Servicios médicos', 'Gastos médicos', 'Servicios funerarios', 'Aparatos ópticos', 'Aportaciones voluntarias', 'Créditos hipotecarios', 'Donaciones'];
+
+            if (impuesto == tipoImpuestos[0]) {
+              idImpuesto = 1;
+            }
+            if (impuesto == tipoImpuestos[1]) {
+              idImpuesto = 2;
+            }
+            if (impuesto == tipoImpuestos[2]) {
+              idImpuesto = 3;
+            }
+            if (impuesto == tipoImpuestos[3]) {
+              idImpuesto = 4;
+            }
+            if (impuesto == tipoImpuestos[4]) {
+              idImpuesto = 5;
+            }
+            if (impuesto == tipoImpuestos[5]) {
+              idImpuesto = 6;
+            }
+            if (impuesto == tipoImpuestos[6]) {
+              idImpuesto = 7;
+            }
+            if (impuesto == tipoImpuestos[7]) {
+              idImpuesto = 8;
+            }
+
+            for (let i = 1; i <= input; i++) {
+              codigoAgregar =
+                ` <p>Ingrese el monto y archivo ${i} que comprueba la deducción:</p>
+                  <input type="hidden" name="tipoImpuesto" value="${idImpuesto}">
+                  <p><input id='' type='number' name='monto' placeholder='Monto' value='' required></p>
+                  <input id='file-picker' type='file' name='myFiles' required> <br>`;
+              div.innerHTML += codigoAgregar;
+            }
+          }
+          function aparecerPComprobantes(divId, inputId, impuesto = '', CI = '', SCI = '') {
+            // const input = document.getElementById(inputId);
+            const div = document.getElementById(divId);
+            if (inputId == 'SI') {
+              div.innerHTML = "";
+              codigoAgregar = `
+                  <p>¿Cuántos comprobantes de ${impuesto} tienes?</p>
+                <p><input id="${CI}" type="number"
+                    oninput="updateValue('${CI}', '${SCI}','${impuesto}')" name="Cantidad"
+                    placeholder="Cantidad" value=""></p>
+
+                <div id="${SCI}">
+                </div>
+              `;
+              div.innerHTML += codigoAgregar;
+            } else {
+              div.innerHTML = "";
+            }
+
+          }
+
+        </script>
+
+        <div>
+          <p>Seleccione sus fuentes de ingresos</p>
+          <select name="fuenteIngresos" id="tipo">
+            <option>Selecciona una opción...</option>
+            <option value="Sueldos, salarios y asimilados">Sueldos, salarios y asimilados</option>
+            <option value="Arrendamiento">Arrendamiento</option>
+            <option value="Enajenacion de biene">Enajenacion de bienes</option>
+            <option value="Adquisición de bienes">Adquisición de bienes</option>
+            <option value="Interese">Intereses</option>
+            <option value="Premio">Premios</option>
+            <option value="Dividendo">Dividendos</option>
+          </select>
+
+          <br>
+          <br>
+          <br>
+        </div>
+        <br>
+
+        <div>
+          <p>Ingrese la cantidad de ingresos personales semanal</p>
+          <p><input type="number" name="salario"></p>
+
+          <br>
+          <br>
+          <br>
+        </div>
+        <br>
+
+        <div>
+          <p>¿Ha obtenido o pagado impuestos en el extranjero o tienes impuestos pendiente de acreditar?</p>
+          <p>Si<input type="radio" name="positive0"
+              onchange="aparecerPComprobantes('PDImpuestosExtranjero', 'SI', 'Impuestos en el extranjero', 'CImpuestosExtranjero','SCImpuestosExtranjero')">
+            No<input type="radio" name="positive0" onchange="aparecerPComprobantes('PDImpuestosExtranjero', 'NO')">
+          </p>
+          <br>
+          <div id="PDImpuestosExtranjero">
+
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+        <br>
+
+
+
+        <div>
+          <p>¿Cuenta con facturas de servicios médicos de usted, conyugue, hijos o padres como consultas o citas con
+            médicos, dentistas, nutriólogos o psicólogos?</p>
+          <p>
+            Si<input type="radio" name="positive1"
+              onchange="aparecerPComprobantes('PSMedicos', 'SI', 'Servicios médicos', 'CSMedicos','SCSMedicos')">
+            No<input type="radio" name="positive1" onchange="aparecerPComprobantes('PSMedicos', 'NO')">
+          </p>
+          <div id="PSMedicos">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <div>
+          <p>¿Cuenta con facturas de gastos médicos mayores de usted, conyugue, hijos o padres?</p>
+          <p>
+            Si<input type="radio" name="positive2"
+              onchange="aparecerPComprobantes('PGMedicos', 'SI', 'Gastos médicos', 'CGastosMedicos','SCGastosMedicos')">
+            No<input type="radio" name="positive2" onchange="aparecerPComprobantes('PGMedicos', 'NO')">
+          </p>
+          <br>
+
+          <div id="PGMedicos">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <div>
+          <p>¿Cuenta con facturas de servicios funerarios de su conyugue, hijos o padres?</p>
+          <p>
+            Si<input type="radio" name="positive3"
+              onchange="aparecerPComprobantes('PSFunerarios', 'SI', 'Servicios funerarios', 'CSFunerarios','SCSFunerarios')">
+            No<input type="radio" name="positive3" onchange="aparecerPComprobantes('PSFunerarios', 'NO')">
+          </p>
+          <br>
+          <div id="PSFunerarios">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <div>
+          <p>¿Cuenta con facturas de aparatos ópticos como lentes para corregir la vista de usted, cónyuge, hijos o
+            padres?</p>
+          <p>
+            Si<input type="radio" name="positive4"
+              onchange="aparecerPComprobantes('PSOpticos', 'SI', 'Aparatos ópticos', 'CSOpticos','SCSOpticos')">
+            No<input type="radio" name="positive4" onchange="aparecerPComprobantes('PSOpticos', 'NO')">
+          </p>
+          <br>
+          <div id="PSOpticos">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <div>
+          <p>¿Cuenta con facturas de gastos médicos como estudios clínicos, análisis, prótesis,
+            compra o renta de aparatos de rehabilitación de usted, cónyuge, hijos o padres?</p>
+          <p>
+            Si<input type="radio" name="positive5"
+              onchange="aparecerPComprobantes('PGMedicosC', 'SI', 'Gastos médicos', 'CGMedicosC','SCGMedicosC')">
+            No<input type="radio" name="positive5" onchange="aparecerPComprobantes('PGMedicosC', 'NO')"></p>
+          <br>
+          <div id="PGMedicosC">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <div>
+          <p>¿Ha realizado aportaciones voluntarias a planes personales para el retiro (AFORE)?</p>
+          <p>
+            Si<input type="radio" name="positive6"
+              onchange="aparecerPComprobantes('PSAfore', 'SI', 'Aportaciones voluntarias', 'CSAfore','SCSAfore')">
+            No<input type="radio" name="positive6" onchange="aparecerPComprobantes('PSAfore', 'NO')">
+          </p>
+          <br>
+          <div id="PSAfore">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <div>
+          <p>¿Ha obtenido intereses reales de créditos hipotecarios?</p>
+          <p>
+            Si<input type="radio" name="positive7"
+              onchange="aparecerPComprobantes('PSHipotecarios', 'SI', 'Créditos hipotecarios', 'CSHipotecarios','SCSHipotecarios')">
+            No<input type="radio" name="positive7" onchange="aparecerPComprobantes('PSHipotecarios', 'NO')">
+          </p>
+          <br>
+          <div id="PSHipotecarios">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <div>
+          <p>¿Ha realizado donaciones a instituciones autorizadas para recibir donativos?</p>
+          <p>
+            Si<input type="radio" name="positive8"
+              onchange="aparecerPComprobantes('PSDonativos', 'SI', 'Donaciones', 'CSDonativos','SCSDonativos')">
+            No<input type="radio" name="positive8" onchange="aparecerPComprobantes('PSDonativos', 'NO')">
+          </p>
+          <br>
+          <div id="PSDonativos">
+          </div>
+
+          <br>
+          <br>
+          <br>
+        </div>
+
+        <br><br>
+
+        <input id="continua" type="submit" value="Continuar"><br>
+
+      </form>
+    </div>
+</body>
+
+</html>

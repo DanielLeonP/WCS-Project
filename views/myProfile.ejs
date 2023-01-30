@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href='../stylesheets/style.css' />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi perfil</title>
+</head>
+
+<body>
+  <%- include menu.ejs %>
+
+    <div id="izquierda3">
+      <h1 style="text-align: center;">Mi perfil</h1>
+      <h3 style="text-align: center;">Bienvenido</h3>
+      <img src="Images/user.png" alt="" style="display: block; margin-left: auto;
+      margin-right: auto;
+      ">
+    </div>
+
+    <div id="derecha3">
+      <div id="texto">
+        <p>Nombre:</p>
+        <p>Correo:</p>
+        <p>RFC:</p>
+      </div>
+
+      <div id="datos">
+        <p>
+          <%= result.Nombre %>
+        </p>
+        <p>
+          <%= result.Correo %>
+        </p>
+        <p>
+          <%= result.RFC %>
+        </p>
+        <p>
+        </p>
+        <br>
+        <br>
+      </div>
+    </div>
+</body>
+
+</html>

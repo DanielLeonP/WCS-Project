@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <title>Desglose</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href='../stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+</head>
+
+<body>
+    <%- include menu2.ejs %>
+        <div id="info">
+            <% if(Declaracion.Estatus=="Pendiente" ){ %>
+                <h1>PENDIENTE</h1>
+
+                <br>
+                <p> Si ya realizó su declaración y obtuvo resultados, ingrese el monto obtenido:
+                    <br>(La comisión será del 20% del monto ingresado)
+                </p>
+                <form action="/crearPago" method="post">
+                    <input type="number" name="monto" placeholder="Monto Obtenido" required>
+                    <input id="boton" type="submit" value="Continuar">
+                </form>
+                <br>
+                <h3>Si aun no realiza su declaración ... guía de como hacerla </h3>
+                <div>
+                    <a href="/guia">Guía</a>
+                </div>
+                <br>
+
+                <h3>Agregar nueva deducción (solo cuando la declaración sigue pendiente)</h3>
+                <input id="boton" type="submit" value="Agregar" onclick="window.location='/AgregarDeduccion'">
+
+                <br>
+                <br>
+                <br>
+                <% }if(Declaracion.Estatus=="Completado" ){ %>
+
+                    <h1>COMPLETADO</h1>
+                    <br>
+                    <br>
+                    <% } %>
+
+
+                        <p> Nombre: <%= Declaracion.Nombre %>
+                        </p>
+                        <p> Periodo: <%= Declaracion.Periodo %>
+                        </p>
+                        <p> Regimen: <%= Declaracion.Regimen %>
+                        </p>
+                        <%if(Declaracion.Estatus=="Completado" ){ %>
+
+                            <p> Monto Total de deducciones: <%= Declaracion.Monto_remunerado %>
+                            </p>
+                            <%if(DevolucionTotal>0 ){ %>
+                                <p> Monto devuelto: $<%= DevolucionTotal %>mxn.
+                                </p>
+                                <% }else{%>
+                                    <p> Pagaste al SAT $<%= DevolucionTotal*-1 %>mxn.
+                                    </p>
+                                    <% } %>
+                            <% }else{ %>
+                                <p> Monto Total de deducciones: <%= Declaracion.Monto_remunerado %>
+                                </p>
+                                <%if(DevolucionTotal>0 ){ %>
+                                    <p> Posible devolución: $<%= DevolucionTotal %>mxn.
+                                    </p>
+                                    <% }else{%>
+                                        <p> Posible pago al SAT $<%= DevolucionTotal*-1 %>mxn.
+                                        </p>
+                                        <% } %>
+                                <% } %>
+                                    
+
+                                                <p> Tipo: <%= Declaracion.Tipo %>
+                                                </p>
+                                                <p> FechaRealizada: <%= Declaracion.FechaRealizada %>
+                                                </p>
+                                                <p> Nombre Usuario: <%= Usuario.Nombre %>
+                                                </p>
+                                                <p> RFC: <%= Usuario.RFC %>
+                                                </p>
+                                                <p> Correo: <%= Usuario.Correo %>
+                                                </p>
+
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <p>IMPUESTOS:</p>
+                                                <br>
+                                                <table id="impuestos">
+                                                    <tr>
+                                                        <th>Info</th>
+                                                        <th>Monto</th>
+                                                        <th>Link</th>
+                                                        <th>Nom.Impuesto</th>
+                                                    </tr>
+                                                    <% for (var i=0; i < Deducciones.length; i++) { %>
+
+                                                        <tr>
+                                                            <td>
+                                                                <%= Deducciones[i].Facturas %>
+                                                            </td>
+
+                                                            <td>
+                                                                <%= Deducciones[i].Cantidad %>
+                                                            </td>
+
+                                                            <td><a href="<%= Deducciones[i].Link %> ">PDF de la
+                                                                    factura</a>
+                                                            </td>
+
+                                                            <td>
+                                                                <%= Deducciones[i].idImpuesto %>
+                                                            </td>
+                                                        </tr>
+
+                                                        <% } %>
+                                                </table>
+        </div>
+</body>
+
+</html>

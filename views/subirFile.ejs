@@ -1,0 +1,40 @@
+<h1>Subir archivos - Azure</h1>
+
+<h2>Subir Archivos</h2>
+<form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+    <div class="upload-container">
+        <label for="image">Select and image to upload: </label>
+        <input id="A" type="text" name="A">
+        <input id="file-picker" type="file" name="myFiles">
+        <input id="file-picker" type="file" name="myFiles">
+        <input id="file-picker" type="file" name="myFiles">
+    </div>
+    <div>
+        <input type="submit" value="Subir archivo">
+    </div>
+</form>
+
+    <% for(var i = 0; i < archivos.length; i++) { %>
+        <a href="<%= archivos[i] %>" target="_blank"><%= nombres[i] %></a> <br />
+        
+    <% } %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const message = document.getElementById('message');
+        const picker = document.getElementById('file-picker');
+
+        document.getElementById('upload-form').addEventListener('submit', (e) => {
+
+            message.innerText = '';
+
+            if (!picker.files.length) {
+                message.innerText = 'Please select an image to upload.';
+                e.preventDefault();
+                return false;
+            }
+        });
+
+    });
+</script>

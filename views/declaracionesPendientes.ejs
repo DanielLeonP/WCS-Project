@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Declaraciones pendientes</title>
+    <link rel="stylesheet"  type="text/css"  href='../stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+  </head>
+  <body>
+    <%- include menu.ejs %>
+    <div id="declara">
+      <h1>Declaraciones pendientes</h1>
+    </div>
+    
+    <div id="tabla2">
+      <table>
+        <thead>
+        <tr>
+          <th>Periodo</th>
+          <th>Tipo</th>
+          <th>Nombre</th>
+          <th>Opciones</th>
+        </tr>
+        </thead>
+        <% for (var i =0; i < DPendientes.length; i++) { %>
+          <tr>
+            <td><%= DPendientes[i].Periodo %></td>
+            <td><%= DPendientes[i].Tipo %></td>
+            <td><%= DPendientes[i].Nombre %></td>
+            <td><input id="genera" type="submit" value="Ver" onclick="window.location='/Desglose/<%= DPendientes[i].idDeclaracion %>'"></td>
+          </tr>       
+        <% } %>
+      </table>
+    </div>
+  </body>
+</html>

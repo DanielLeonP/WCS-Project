@@ -1,0 +1,20 @@
+ul { /* Revisado */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #03192B;
+  }
+  li { /* Revisado */
+    float: left;
+  }
+  li a { /* Revisado */
+    display: block;
+    color: #B5B9BD;
+    text-align: center;
+    padding: 20px 22px;
+    text-decoration: none;
+  }
+  li a:hover { /* Revisado */
+    background-color: #111;
+  }

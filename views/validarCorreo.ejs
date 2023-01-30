@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Nueva Declaración</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <%- include menu.ejs %>
+    <form action="/ValidarCorreo" method='POST'>
+      <div id="declarar">
+        <h1>Validación de Correo Electrónico</h1>
+
+        <p>Ingresa el código que recibiste en tu correo <%= Correo %>:</p>
+        <input id="celular" type="number" name="codigo" placeholder="Código" required value=""><br>
+        <input id="continua" type="submit" value="Validar Código"><br>
+      </div>
+    </form>
+
+</body>
+
+</html>

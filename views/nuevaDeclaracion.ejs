@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Nueva Declaración</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <%- include menu.ejs %>
+    <form action="/NuevaDeclaracion" method='POST'>
+      <div id="declarar">
+        <h1>Nueva Declaración</h1>
+        <br>
+        <p>Nombre de la declaración:</p>
+        <input id="nombre2" type="text" name="nombre" placeholder="Nombre de la declaración" required
+          value="<%= nombreDeclaracion %>"><br>
+        <br>
+        <p>Confirmación de correo:</p>
+        <input id="correo2" type="email" name="correo" placeholder="Correo" required value="<%= user.Correo %>"><br>
+        <br>
+        <!-- <p>Número de celular:</p>
+        <input id="celular" type="text" name="celular" placeholder="Celular" required value=""><br> -->
+        <p>Año a declarar:</p>
+        <input id="fecha" type="number" name="periodo" placeholder="Año a declarar" required min="2010"
+          max="<%= anoActual %>" value="<%= anoActual %>"><br>
+        <br>
+
+        <p>Tipo de declaración:</p>
+        <select name="tipoDeclaracion" id="tipo">
+          <option value="Anual">Anual</option>
+        </select>
+        <br>
+
+        <p>Regimen:</p>
+        <select name="regimen" id="regimen">
+          <option value="Persona física">Persona física</option>
+        </select>
+        <br>
+
+        <input id="continua" type="submit" value="Continuar"><br>
+      </div>
+    </form>
+
+</body>
+
+</html>
